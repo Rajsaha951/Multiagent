@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    image: researchmind-langchain
+    ports:
+      - "8000:8000"
+    # API keys are read from .env at runtime and are never baked into the image.
+    env_file:
+      - .env
+    restart: unless-stopped

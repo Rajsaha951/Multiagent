@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResearchMind</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <h1>ResearchMind</h1>
+        <p>Give it a topic. Four AI agents search the web, read the sources, write a report and review it.</p>
+      </header>
+
+      <div id="banner" class="banner" role="alert" hidden></div>
+
+      <main class="workspace">
+        <section class="side" aria-label="Research controls">
+          <form id="form">
+            <label for="topic">Research topic</label>
+            <input id="topic" type="text" maxlength="200" placeholder="e.g. Progress in fusion energy" autocomplete="off" />
+            <label class="check">
+              <input id="revise" type="checkbox" checked />
+              Rewrite the report if the critic scores it below 7
+            </label>
+            <button id="run" type="submit" class="btn-primary wide" disabled>Research this topic</button>
+            <button id="cancel" type="button" class="btn-secondary wide" hidden>Cancel run</button>
+          </form>
+
+          <ol id="trace" class="trace" aria-label="Agent progress" hidden></ol>
+          <p id="error" class="error" role="alert" hidden></p>
+        </section>
+
+        <section class="main" aria-live="polite">
+          <div id="empty" class="empty">
+            <h2 id="empty-title">No report yet</h2>
+            <div id="empty-body">
+              <p>Enter a topic on the left, or start with one of these:</p>
+              <div id="examples" class="examples"></div>
+            </div>
+          </div>
+
+          <div id="result" class="report-layout" hidden>
+            <article class="report">
+              <div class="report-toolbar">
+                <span id="report-note" class="report-note" hidden>Revised after the critic’s feedback</span>
+                <button id="download" type="button" class="btn-secondary">Download as Markdown</button>
+              </div>
+              <div id="report-body"></div>
+            </article>
+            <aside id="critic" class="critic" aria-label="Critic feedback" hidden>
+              <h2>Critic’s review</h2>
+              <p id="score" class="score" hidden><strong id="score-value"></strong><span>out of 10</span></p>
+              <div id="critic-text" class="critic-text"></div>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="vendor/marked.umd.js"></script>
+    <script src="vendor/purify.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
